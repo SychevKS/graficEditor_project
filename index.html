@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Paint</title>
+	<link rel="stylesheet" href="css/style.min.css">
+</head>
+<body>
+
+	<section class="area">
+
+		<div class="coord-menu">
+			<div class="coord-menu__text">x:</div>
+			<input id="coord-menu__inputx" type="number" class="coord-menu__input">
+			<div class="coord-menu__text">y:</div>
+			<input id="coord-menu__inputy" type="number" class="coord-menu__input">
+			<div class="coord-menu__text">z:</div>
+			<input id="coord-menu__inputz" type="number" class="coord-menu__input">
+			<button id="btn_coord-menu" class="btn coord-menu__btn">OK</button>
+		</div>
+
+		<div class="area__menu">
+
+			<div class="coord_system">
+				<!-- <div class="title">Система координат</div> -->
+				<div class="coord_system__buttons">
+					<button id="btn_xy" class="btn btn-xy">xy</button>
+					<button id="btn_xy" class="btn btn-xy">xz</button>
+				</div>
+			</div>
+
+			<div class="area__func">
+				<div class="title">Функции:</div>
+				<div class="area__func-btns">
+					<button class="btn btn-func">Редактировать</button>
+					<button class="btn btn-func">Фокус</button>
+					<button class="btn btn-func">Удалить</button>
+				</div>
+			</div>
+
+			<div class="title">Объекты 2D:</div>
+			<div class="area__obj-btns">
+				<button class="btn btn-obj obj_line"></button>
+				<button class="btn btn-obj obj_triangle"></button>
+				<button class="btn btn-obj obj_rect"></button>
+			</div>
+
+			<div class="area__output">
+				<div class="area__output-item">
+					<div class="subtitle">Координаты мыши:</div>
+					<div class="area__output-item__data">
+						<span>x = <span id="mouseX">0</span>; y = <span id="mouseY">0</span></span>
+					</div>
+				</div>
+
+				<div class="area__output-item">
+					<div class="subtitle">Координаты точки:</div>
+					<div class="area__output-item__data">
+						<span>x = <span id="pointX">0</span>; y = <span id="pointY">0</span></span>
+					</div>
+				</div>
+
+				<div class="area__output-item">
+					<div class="subtitle">Уравнение прямой:</div>
+					<div class="area__output-item__data">
+						<span> <span id="A">A</span>x + <span id="B">B</span>y + <span id="C">С</span> = 0</span>
+					</div>
+				</div>
+			</div>
+			
+			<div class="saveload">
+				<input id="inputSave" class="saveload__input" type="text" placeholder="Введетие имя файла">
+				<button id="btnSave">Сохранить</button>
+				<input type='file' id='fileinput'>
+     			<button id='btnLoad'>Загрузить</button>
+			</div>
+
+		</div>
+
+		<div class="area__canvas">
+			<canvas id="canvas"></canvas>
+		</div>
+
+		<div class="area__menu">
+
+			<div class="title">Операции:</div> 
+
+			<div id="message">
+				Выберите объект с помощью функции "Фокус"
+			</div>
+
+			<div id="operation" class="operation" style="display: none;">
+				<div class="operation-item">
+					<div class="operation-item__title">Смещение</div>
+					<div class="operation-item__wrapper">
+						<div>
+							<div class="operation-item__text">x:</div>
+							<input id="input_m" type="number" class="operation-item__input">
+						</div>
+						<div>
+							<div class="operation-item__text">y:</div>
+							<input id="input_n" type="number" class="operation-item__input">
+						</div>
+						<div>
+							<div class="operation-item__text">z:</div>
+							<input id="input_l" type="number" class="operation-item__input">
+						</div>	
+					</div>
+				</div>
+				<div class="operation-item">
+					<div class="operation-item__title">Масштабирование</div>		
+					<div class="operation-item__wrapper">
+						<div>
+							<div class="operation-item__text">x:</div>
+							<input id="input_a" type="number" class="operation-item__input">
+						</div>
+						<div>
+							<div class="operation-item__text">y:</div>
+						<input id="input_d" type="number" class="operation-item__input">
+						</div>
+						<div>
+							<div class="operation-item__text">z:</div>
+							<input id="input_e" type="number" class="operation-item__input">
+						</div>	
+					</div>
+				</div>
+				<div class="operation-item">
+					<div class="operation-item__title">Поворот вокруг осей</div>		
+					<div class="operation-item__wrapper">
+						<div>
+							<div class="operation-item__text">х:</div>
+							<input id="input_Rx" type="number" class="operation-item__input">
+						</div>
+						<div>
+							<div class="operation-item__text">y:</div>
+						<input id="input_Ry" type="number" class="operation-item__input">
+						</div>
+						<div>
+							<div class="operation-item__text">z:</div>
+							<input id="input_Rz" type="number" class="operation-item__input">
+						</div>	
+					</div>
+				</div>
+				<div class="operation-item">
+					<div class="operation-item__title">Зеркалирование</div>
+					<div class="operation-item__text">x:</div>
+					<input id="input_x" type="checkbox" class="operation-item__checkbox">
+					<div class="operation-item__text">y:</div>
+					<input id="input_y" type="checkbox" class="operation-item__checkbox">
+					<div class="operation-item__text">z:</div>
+					<input id="input_z" type="checkbox" class="operation-item__checkbox">
+				</div>
+				<div class="switch">
+					<div class="switch__text">Локальная<br> система<br> координат</div>
+					<div class="switch-btn"></div>
+				</div>
+				<button id="btn-operation" class="btn btn-operation">выполнить</button>
+			</div>
+			
+		</div>
+		
+	</section>
+
+
+	
+	<script src="js/canvas.js" async defer></script>
+  </body>
+</html>
